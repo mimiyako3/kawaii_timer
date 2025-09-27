@@ -1,38 +1,184 @@
-.App {
-  text-align: center;
-}
+/* client/src/App.css */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* 1. フォントのインポートを想定 (index.htmlにlinkタグを貼るか、@importを使う) */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Varela+Round&display=swap');
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* 全体レイアウト */
+body {
+  margin: 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fce4ec; /* ほんのり桜色 */
+  color: #795152; /* 落ち着いた茶色 */
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  min-height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.container {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(220, 180, 200, 0.4); 
+  text-align: center;
+  width: 90%;
+  max-width: 450px;
+  transition: all 0.5s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+  color:#795152;
+  margin-top: 0;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+}
+
+/* 通常時のフェーズ表示 */
+.phase-indicator {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 50px;
+  margin-bottom: 25px;
+  display: inline-block;
+  min-width: 120px;
+  transition: background-color 0.5s ease;
+}
+
+/* 通常時のタイマー表示 (分:秒) */
+.timer-display {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 3rem; /* 通常は小さめ */
+  font-weight: 300;
+  margin-bottom: 20px;
+  color: #795152;
+  letter-spacing: 2px;
+}
+
+/* 見出しと入力フォーム */
+.input-group,
+.repetition-input {
+  margin-bottom: 25px;
+}
+
+h2 {
+  font-size: 1.2rem;
+  color: #795152;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+input[type="number"] {
+  width: 80px;
+  padding: 10px;
+  margin: 0 5px;
+  border: 1px solid #ffccd5;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+  background-color: #fff5f8;
+  -moz-appearance: textfield;
+}
+
+/* ボタン */
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  color: #fff;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:nth-child(1) {
+  background-color: #ff80ab; /* スタート */
+}
+
+button:nth-child(2) {
+  background-color: #ffb4cd; /* ストップ */
+}
+
+button:nth-child(3) {
+  background-color: #c5cae9; /* リセット */
+}
+
+
+/* ========================================================== */
+/* 2. 🚀 フルスクリーン（実行中）モードのスタイル */
+/* ========================================================== */
+
+.full-screen-mode {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 3rem; /* 通常は小さめ */
+  font-weight: 300;
+  margin-bottom: 20px;
+  color: #795152;
+  letter-spacing: 2px;
+  background-color: transparent; 
+  z-index: 1000;
+}
+
+.full-screen-timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* フルスクリーン時の大きなタイマー表示 (秒数のみ) */
+.full-screen-mode .fs-timer-display {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 30vw; /* 画面幅に応じて非常に大きく表示 */
+    font-weight: 700;
+    line-height: 1;
+    color: #795152; 
+    margin: 20px 0;
+}
+
+/* フルスクリーン時のフェーズ表示 */
+.full-screen-mode .fs-phase-indicator {
+   font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 50px;
+  margin-bottom: 25px;
+  display: inline-block;
+  min-width: 120px;
+  transition: background-color 0.5s ease;
+    /* 既存のphase-indicatorのスタイルを継承 */
+}
+
+/* フルスクリーン時の繰り返し情報 */
+.full-screen-mode .fs-repetition-info {
+    font-size: 1.5rem;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* フルスクリーン時のストップボタン */
+.full-screen-mode .fs-stop-button {
+    position: absolute;
+    bottom: 5vh;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    background-color: #f48fb1;
+    box-shadow: 0 4px 10px rgba(244, 143, 177, 0.4);
 }
